@@ -45,7 +45,9 @@ def git_update(text='x', repodirct= CurrentAccount.room):
     try:
         file = Repo.get_contents(CurrentAccount.room)
         old = file.decoded_content.decode("utf-8")
-        new = old + text + "\n"
+        old2 = old.splitlines()
+        nigga = old[1::]
+        new = old2[0] + "\n"+ "\t" + "\n" + text + nigga
         Repo.update_file(repodirct, "skibidi text!", new, file.sha)
     except Exception as e:
         print("GitE:", e)    
@@ -66,7 +68,7 @@ def create(path = f"{get_local_ip()}.json"):
     "name":f"{CurrentAccount.name}",
     "ip":f"{CurrentAccount.ip}",
     "code":f"{CurrentAccount.code}",
-    }
+}
     with open(path, "w") as acc:  
         json.dump(info, acc, indent=4)
     with open(path, "r") as acc:
