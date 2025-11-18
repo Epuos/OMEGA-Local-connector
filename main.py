@@ -46,8 +46,9 @@ def git_update(text='x', repodirct= CurrentAccount.room):
         file = Repo.get_contents(CurrentAccount.room)
         old = file.decoded_content.decode("utf-8")
         old2 = old.splitlines()
-        nigga = old[1::]
-        new = old2[0] + "\n"+ "\t" + "\n" + text + nigga
+        nigga = old[3::]
+        new = old[0] + "\n" + old[1] + text + nigga
+        print(new)
         Repo.update_file(repodirct, "skibidi text!", new, file.sha)
     except Exception as e:
         print("GitE:", e)    
@@ -132,26 +133,29 @@ def One():
         CurrentAccount.code = Code.get()
         git_update(
 f"""
-    "{get_local_ip()}":{{
-    "name":"{CurrentAccount.name}"
-    "ip":"{CurrentAccount.ip}",
-    "code":"{CurrentAccount.code}",
-    }}
-    }}
-""")
+
+    {{
+    "name":"{CurrentAccount.name}",
+    "LocIP":"{CurrentAccount.ip}",
+    "code":"{CurrentAccount.code}"
+    }}""")
         root.destroy()
     
     t.Button(root, text="Submit", command=lambda: GetAll()).pack()
     root.mainloop()
 
 def Two():
-    root = t.Tk
+    file = Repo.get_contents(CurrentAccount.room)
+    old = file.decoded_content.decode("utf-8")
+    root = t.Tk()
     root.geometry("150x100")
     Item(root, "", 999).pack(fill=t.X, padx=10, pady=5)
     Item(root, "Mouse", 29).pack(fill=t.X, padx=10, pady=5)
     Item(root, "Keyboard", 149).pack(fill=t.X, padx=10, pady=5)
+    root.mainloop()
     
 
 #main
 if __name__ == "__main__":
     One()
+    #Two()
